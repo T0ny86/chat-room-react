@@ -1,15 +1,14 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Chat from './pages/Chat';
-import Login from './pages/Login';
-import Register from './pages/Register';
+
+import { Signup, Login, Chat } from './pages'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/login' element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path='/' element={<Chat />} />
       </Routes>
     </BrowserRouter>
