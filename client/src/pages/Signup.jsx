@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import api, { signupRoute } from '../utils/API'
 import { Logo } from '../assets'
 
 const Signup = () => {
@@ -46,9 +47,9 @@ const Signup = () => {
         toastOptions
       );
       return false;
-    } else if (password.length < 8) {
+    } else if (password.length < 6) {
       toast.error(
-        "Password should be equal or greater than 8 characters.",
+        "Password should be equal or greater than 6 characters.",
         toastOptions
       );
       return false;
@@ -65,6 +66,16 @@ const Signup = () => {
     if (handleValidation()) {
       const { email, username, password } = values;
       // API
+      const { data } = await api.post(signupRoute, {
+        username, email, password
+      })
+
+      if (data.status === false) toast.error(data.msg, toastOptions)
+      if (data.status === true) {
+        localStorage.setItem('current-user', JSON.stringify(data.user))
+        navigate("/")
+      }
+
     }
   };
 
