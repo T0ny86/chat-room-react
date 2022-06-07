@@ -5,17 +5,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import api, { signupRoute } from '../utils/API'
+import { toastOptions } from "../utils";
 import { Logo } from '../assets'
 
 const Signup = () => {
   const navigate = useNavigate();
-  const toastOptions = {
-    position: "bottom-right",
-    autoClose: 4000,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-  };
+
   const [values, setValues] = useState({
     username: "",
     email: "",
