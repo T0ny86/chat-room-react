@@ -5,6 +5,7 @@ import * as user from "../controllers/user.js"
 router.post("/signup", user.signup)
 router.post("/login", user.login)
 router.post("/setAvatar/:id", user.setAvatar)
+router.post("/allUsers/:id", user.getAllUsers)
 
 
 export default router;
