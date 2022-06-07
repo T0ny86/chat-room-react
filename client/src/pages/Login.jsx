@@ -19,8 +19,11 @@ const Login = () => {
     theme: "dark",
   };
   useEffect(() => {
-    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY) &&
+      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY) !== 'undefined') {
       navigate("/");
+    } else {
+      navigate("/login")
     }
   }, []);
 

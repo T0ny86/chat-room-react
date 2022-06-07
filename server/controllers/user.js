@@ -32,5 +32,18 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
+    try {
+        const { username, password } = req.body
+        const fetchedUser = await User.findOne({ username })
+        if (!fetchedUser) return res.json({ msg: "Incorrect username or password", status: false })
 
+        const isPasswordValid = await bcrypt.compare(password, fetchedUser.password)
+        if (!isPasswordValid) return res.json({ msg: "Incorrect username or password", status: false })
+
+        delete fetchedUser.password
+        return res.json({ status: true, user: fetchedUser })
+
+    } catch (error) {
+        return res.json({ err: error })
+    }
 }
