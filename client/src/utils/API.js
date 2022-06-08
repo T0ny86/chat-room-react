@@ -12,3 +12,4 @@ export const signupRoute = `${URL}/api/auth/signup`
 export const loginRoute = `${URL}/api/auth/login`
 export const logoutRoute = `${URL}/api/auth/logout`
 export const setAvatarRoute = `${URL}/api/auth/setAvatar`;
+export const allUsersRoute = `${URL}/api/auth/allusers`;
