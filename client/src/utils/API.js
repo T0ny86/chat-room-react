@@ -13,3 +13,5 @@ export const loginRoute = `${URL}/api/auth/login`
 export const logoutRoute = `${URL}/api/auth/logout`
 export const setAvatarRoute = `${URL}/api/auth/setAvatar`;
 export const allUsersRoute = `${URL}/api/auth/allusers`;
+export const sendMessageRoute = `${URL}/api/messages/addmsg`;
+export const recieveMessageRoute = `${URL}/api/messages/getmsg`;
