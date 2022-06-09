@@ -22,4 +22,18 @@ export const getMessages = () => {
     }
 }
 
-export const addMessages = () => { }
+export const addMessages = () => {
+    try {
+        const { from, to, message } = req.body;
+        const data = await Messages.create({
+            message: { text: message },
+            users: [from, to],
+            sender: from,
+        });
+
+        if (data) return res.json({ msg: "Message sent it successfully." });
+        else return res.json({ msg: "Failed to send message" });
+    } catch (ex) {
+        next(ex);
+    }
+}
