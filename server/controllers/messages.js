@@ -1,6 +1,6 @@
-import Messages from '../models/messageModel'
+import Messages from '../models/messageModel.js'
 
-export const getMessages = () => {
+export const getMessages = async () => {
     try {
         const { from, to } = req.body;
 
@@ -22,7 +22,7 @@ export const getMessages = () => {
     }
 }
 
-export const addMessages = () => {
+export const addMessages = async () => {
     try {
         const { from, to, message } = req.body;
         const data = await Messages.create({

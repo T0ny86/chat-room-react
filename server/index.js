@@ -1,13 +1,13 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import socket from 'socket.io'
+import { Socket } from 'socket.io'
 
 import dotenv from 'dotenv'
 dotenv.config({ path: "./.dotenv" })
 
 import userRoutes from "./routes/userRoutes.js"
-import msgRoutes from './routes/messageRoutes'
+import msgRoutes from './routes/messageRoutes.js'
 
 const app = express()
 app.use(cors())
@@ -26,7 +26,7 @@ app.use("/api/messages", msgRoutes)
 mongoose.connect(dbURL)
     .then(() => {
         const server = app.listen(PORT, () => console.log(`Server running on posrt: ${PORT}`))
-        const io = socket(server, {
+        const io = new Socket(server, {
             cors: {
                 origin: "http://localhost:3000",
                 Credential: true,
@@ -39,10 +39,10 @@ mongoose.connect(dbURL)
                 onlineUsers.set(userId, socket.id)
             })
         })
-        socket.on("send-msg", (data) => {
+        Socket.on("send-msg", (data) => {
             const sendUserSocket = onlineUsers.get(data.to);
             if (sendUserSocket) {
-                socket.to(sendUserSocket).emit("msg-recieve", data.msg);
+                Socket.to(sendUserSocket).emit("msg-recieve", data.msg);
             }
         });
     })
